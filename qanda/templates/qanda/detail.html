@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>QandA - Free Django Questions and Answer App</title>
+    
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'qanda/style.css' %}" />
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'qanda/vendor/bootstrap/css/bootstrap.min.css' %}" />
+ 
+<link href="{% static 'qanda/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">    
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+</head>
+
+ <body id="page-top">
+ 
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="{% url 'qanda:index'%}">QandA</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{% url 'qanda:displayaddquestion'%}">Ask Question</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+ <!-- Questions Detail -->
+    <section id="questions">
+      <div class="container">
+         <div class="row">     
+          	<div class="col-lg-12 text-center">
+                 <h4 class="service-heading">{{ question.question_name }}</h4>
+            </div>	
+           </div>
+        	 	<div class="col-lg-12">
+        	 		<div class="row">
+        	 			<button type="submit" class="btn btn-default" id="upvotebutton" data-questionid="{{ question.id }}"><i class="fa fa-arrow-up"></i></button>
+        	 		</div>
+        	 		<div class="row">
+        	 			<h4 class="service-heading">{{question.votes}} </h4>    	 		
+        	 		<div class="col-lg-6 text-center">
+                 		<h4 class="service-heading">{{ question.question_text }}</h4>
+            		</div>	
+            		</div>      
+        	 		<div class="row">
+        	 		    <button type="submit" class="btn btn-default" id="downvotebutton" data-questionid="{{ question.id }}"><i class="fa fa-arrow-down"></i></button>
+        	 		</div>
+        	  </div>   
+        	  	 		             
+
+        <hr style="width: 100%; color: #eeeeee; height: 1px; background-color:#eeeeee;" />	
+        		    
+        <div class="row">
+         <div class="col-xs-12">
+       	  <form action="{% url 'qanda:answer' question.id %}" method="post">
+			{% csrf_token %}
+			{% if question.answer_set.all  %}
+			    <h4 class="service-heading">Answers:</h4>
+			{% else %}
+			    <h4 class="service-heading">No Answers yet...</h4>
+			{% endif %}
+		    {% for answer in question.answer_set.all %}			
+				<h4 class="service-heading">{{ forloop.counter }}. {{ answer.answer_text }}</h4>
+		    {% endfor %}
+		   </div>
+		   </div>
+		    <div class="row">
+         		<div class="col-lg-12 text-center">
+					{{ value|linebreaks }}
+           		 	<h4 class="service-heading">Your Answer: <input type="text" id="answertext" name="answertext" value="" required/></h4>
+					{{ value|linebreaks }}
+					<input type="submit" class="btn btn-primary btn-xl text-uppercase" value="Submit Answer" />
+		        </div>
+		    </div>
+		  </form>
+		 </div>
+    </section>    
+        
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <span class="copyright">Copyright &copy; Boris Misljencevic 2018</span>
+          </div>
+          <div class="col-md-4">
+            <ul class="list-inline social-buttons">
+          
+              <li class="list-inline-item">
+                <a href="https://www.facebook.com/bmisljen/">
+                  <i class="fa fa-facebook"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/boris-misljencevic-775583108/">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+        
+	<!-- Bootstrap core JavaScript -->
+ 	<script src="{% static 'qanda/vendor/jquery/jquery.min.js' %}"></script>
+ 	<script src="{% static 'qanda/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+	
+	<!-- Plugin JavaScript -->
+	<script src="{% static 'qanda/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+ 	<!-- Custom scripts for this template -->
+    <script src="{% static 'qanda/js/agency.js' %}"></script>
+  </body>
+ </html>
+  
