@@ -39,58 +39,57 @@
         </div>
       </div>
     </nav>
-
- <!-- Questions Detail -->
+   
+     <!-- Questions List -->
     <section id="questions">
       <div class="container">
-         <div class="row">     
-          	<div class="col-lg-12 text-center">
-                 <h4 class="service-heading">{{ question.question_name }}</h4>
-            </div>	
-           </div>
+      {% if latest_question_list %}
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Search Results</h2>
+            <h4 class="service-heading">Click on a question to view it</h4>
+          </div>
+        </div>
+        {{ value|linebreaks }}
+        {{ value|linebreaks }}             
+        <ul>
+        {% for question in latest_question_list %}  
+          <div class="row">     	
         	 	<div class="col-lg-12">
         	 		<div class="row">
-        	 			<button type="submit" class="btn btn-vote" id="upvotebutton" data-questionid="{{ question.id }}"><i class="fa fa-arrow-up"></i></button>
+        	 			<button type="submit" class="btn btn-vote" id="upvotebutton{{ forloop.counter }}" data-questionid="{{ question.id }}"><i class="fa fa-arrow-up"></i></button>
         	 		</div>
         	 		<div class="row">
-        	 		    <button type="button" class="btn btn-vote" disabled>{{question.votes}}</button>       	 		   	 		
-        	 		<div class="col-lg-6 text-center">
-                 		<h4 class="service-heading">{{ question.question_text }}</h4>
-            		</div>	
-            		</div>      
+        	 			<button type="button" class="btn btn-vote" disabled>{{question.votes}}</button>
+        	 		    <div class="col-lg-6 text-left">
+        	 				<li><h4 class="service-heading"><a href="{% url 'qanda:detail' question.id %}">{{ question.question_name }}</a></li></h4>
+        	 			</div>
+        	 		  </div>
         	 		<div class="row">
-        	 		    <button type="submit" class="btn btn-vote" id="downvotebutton" data-questionid="{{ question.id }}"><i class="fa fa-arrow-down"></i></button>
+        	 			<button type="submit" class="btn btn-vote" id="downvotebutton{{ forloop.counter }}" data-questionid="{{ question.id }}"><i class="fa fa-arrow-down"></i></button>
         	 		</div>
-        	  </div>   
-        	  	 		             
-
-        <hr style="width: 100%; color: #eeeeee; height: 1px; background-color:#eeeeee;" />	
-        		    
-        <div class="row">
-         <div class="col-xs-12">
-       	  <form action="{% url 'qanda:answer' question.id %}" method="post">
-			{% csrf_token %}
-			{% if question.answer_set.all  %}
-			    <h4 class="service-heading">Answers:</h4>
-			{% else %}
-			    <h4 class="service-heading">No Answers yet...</h4>
-			{% endif %}
-		    {% for answer in question.answer_set.all %}			
-				<h4 class="service-heading">{{ forloop.counter }}. {{ answer.answer_text }}</h4>
-		    {% endfor %}
-		   </div>
-		   </div>
-		    <div class="row">
-         		<div class="col-lg-12 text-center">
-					{{ value|linebreaks }}
-           		 	<h4 class="service-heading">Your Answer: <input type="text" id="answertext" name="answertext" value="" required/></h4>
-					{{ value|linebreaks }}
-					<input type="submit" class="btn btn-primary btn-xl text-uppercase" value="Submit Answer" />
-		        </div>
-		    </div>
-		  </form>
-		 </div>
-    </section>    
+        	 	</div>	
+          </div>
+        {{ value|linebreaks }}
+        {% endfor %}
+        </ul>
+        {% else %}
+          <div class="row">
+          	<div class="col-lg-12 text-center">
+            	<h2 class="section-heading text-uppercase">No Questions Match Search</h2>
+          	</div>
+          </div>
+        {% endif %}
+        
+       <div class="row">
+        	<div class="col-lg-12 text-center">
+        	    {{ value|linebreaks }}
+           	    {{ value|linebreaks }}
+         		<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{% url 'qanda:index'%}">Home</a> 
+        	</div>
+        </div>
+      </div>
+    </section>
         
     <!-- Footer -->
     <footer>
@@ -121,7 +120,7 @@
 	<!-- Bootstrap core JavaScript -->
  	<script src="{% static 'qanda/vendor/jquery/jquery.min.js' %}"></script>
  	<script src="{% static 'qanda/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-	
+
 	<!-- Plugin JavaScript -->
 	<script src="{% static 'qanda/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
@@ -129,4 +128,3 @@
     <script src="{% static 'qanda/js/agency.js' %}"></script>
   </body>
  </html>
-  

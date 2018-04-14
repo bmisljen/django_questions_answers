@@ -6,6 +6,10 @@ class AnswerInline(admin.TabularInline):
     extra = 3
     
 class QuestionAdmin(admin.ModelAdmin):
+    """
+    Custom display of questions and filtering of questions by publication date. Answers can 
+    be added inline (3 at a time) to increase efficiency 
+    """
     fieldsets = [
         (None,               {'fields': ['question_name']}),
         (None,               {'fields': ['question_text']}),

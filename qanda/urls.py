@@ -20,4 +20,6 @@ urlpatterns = [
     path('displayaddquestion/', views.displayAddQuestion.as_view(), name='displayaddquestion'),
     # ex: /qanda/5/addquestion/
     path('addquestion/', views.addQuestion, name='addquestion'), 
+    # ex: /qanda/questionsearch/
+    path('questionsearch/', views.questionSearch.as_view(), name='questionsearch'),
 ]

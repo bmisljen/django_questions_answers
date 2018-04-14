@@ -5,6 +5,9 @@ from django.utils import timezone
 
 # Question that is being asked 
 class Question(models.Model):
+    """
+    A question has a name, a description text, and the number of upvotes/downvotes 
+    """
     question_name = models.CharField(max_length=80, default='')
     question_text = models.CharField(max_length=300)
     pub_date = models.DateTimeField('date published')
@@ -21,6 +24,9 @@ class Question(models.Model):
     was_published_recently.short_description = 'Published recently?'
     
 class Answer(models.Model):
+    """
+    Each answer contains an answer text. Each question can have on or many answers 
+    """
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer_text = models.CharField(max_length=200)
     def __str__(self):

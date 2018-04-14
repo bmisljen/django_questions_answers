@@ -1,12 +1,16 @@
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.shortcuts import get_object_or_404
 from .models import Answer, Question
 from django.urls import reverse
 from qanda import models
 from django.views import generic
 from django.utils import timezone
+from django.db.models import Q
 
 class index(generic.ListView):
+    """
+    Displays the home page with the 5 most recent questions listed
+    """
     template_name = 'qanda/index.html'
     context_object_name = 'latest_question_list'
 
@@ -20,7 +24,10 @@ class index(generic.ListView):
             ).order_by('-pub_date')[:5]
 
 class detail(generic.DetailView):
-    # raise an error if the question does not exist 
+    """
+    Shows all answers for a question and allows for adding answers and voting
+    on a question 
+    """
     model = Question
     template_name = 'qanda/detail.html'
     
@@ -32,7 +39,7 @@ class detail(generic.DetailView):
 
 def voteup(request):
     """
-    Up vote a questions from either the index.html or detail.html templates    
+    Up vote a question from either the index.html or detail.html templates    
     """
     if request.is_ajax():
         
@@ -47,7 +54,7 @@ def voteup(request):
 
 def votedown(request):
     """
-    Down vote a questions from either the index.html or detail.html templates    
+    Down vote a question from either the index.html or detail.html templates    
     """
     if request.is_ajax():
         
@@ -61,6 +68,9 @@ def votedown(request):
         return JsonResponse({'status':'Fail', 'msg':'Not a valid request'})
     
 def answer(request, question_id):
+    """
+    Add an answer to a question 
+    """
     question = get_object_or_404(Question, pk=question_id)
     try:
         answer_text = request.POST.get('answertext')
@@ -75,10 +85,16 @@ def answer(request, question_id):
     return HttpResponseRedirect(reverse('qanda:results', args=(question.id,)))
 
 class results(generic.DetailView):
+    """
+    Display results.html when a question answer is sucessfully added 
+    """
     model = Question
     template_name = 'qanda/results.html'
 
 class displayAddQuestion(generic.ListView):
+    """
+    Add a new question 
+    """
     model = Question
     template_name = 'qanda/displayAddQuestion.html'
 
@@ -91,3 +107,20 @@ def addQuestion(request):
                                               votes=0)
     question.save()
     return HttpResponseRedirect(reverse('qanda:index'))
+
+class questionSearch(generic.ListView):
+    """
+    Displays the questions that are searched for by question_name and question_text 
+    """
+    template_name = 'qanda/searchResults.html'
+    context_object_name = 'latest_question_list'
+    
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        
+        if query:            
+            return Question.objects.filter(Q(question_name__icontains=query) |
+                                           Q(question_text__icontains=query))
+            
+        else:
+            return HttpResponse('Please submit a search term.')
