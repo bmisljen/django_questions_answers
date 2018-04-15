@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+"psycopg2" = "==2.7.4"
+pytz = "==2018.4"
+whitenoise = "==3.3.1"
+Django = "==2.0.4"
+gunicorn = "*"
+django-heroku = "*"
+python-decouple = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"

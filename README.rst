@@ -2,43 +2,45 @@
 QandA 
 =====
 
-QandA is a simple Django app to for questions and answers. A user can add a question,
+QandA is a simple Django app for questions and answers. A user can add a question,
 answer the question with one or more answers, vote a question up or down and search for specific questions 
 by question name or question text. 
 
-The 5 most recent questions are displayed on the index page: http://127.0.0.1:8000/qanda/ along with their votes. You
-can click on a question to view and add answers or click on the up/down arrows to up vote or down vote the question. 
+Running locally:
 
-A configured admin interface is also included for adding questions and answers and test cases are also available. 
+The 5 most recent questions are displayed on the home page: http://127.0.0.1:8000/qanda/ along with their votes counts. You
+can click on a question to view it and add answers or click on the up/down arrows to up vote or down vote the question. Searching 
+questions by question name and question text is also supported from the home page. 
+
+A configured admin interface can be found at: http://127.0.0.1:8000/admin and it can be used for adding questions and answers. Unit test
+cases are also available and can be run using: python manage.py test qanda  
 
 
 Quick start
 -----------
+0. Either clone the git repo into a local folder and transfer the qanda folder into your Django project or use pip to install 
+the: django-qanda-0.1.zip file (located in the git repo) by using the following command:
 
-1. Add "qanda" to your INSTALLED_APPS setting like this::
+ pip install --user django-qanda-0.1.zip
+
+1. Add "qanda" to your Django project INSTALLED_APPS section of the settings file like this:
 
     INSTALLED_APPS = [
         ...
         'qanda',
     ]
 
-2. Include the qanda URLconf in your project urls.py like this::
+2. Include the qanda URLconf in your Django project urls.py file like this:
 
     path('qanda/', include('qanda.urls')),
 
-3. Run `python manage.py migrate` to create the qanda models.
+3. In your Django project directory, run: `python manage.py migrate` to create the qanda models.
 
 4. Start the development server and visit http://127.0.0.1:8000/admin/
-   to create a questions (you'll need the Admin app enabled).
+   to create questions and answers (you'll need the Admin app enabled in your Django project).
 
 5. Visit http://127.0.0.1:8000/qanda/ to create questions, answer questions and vote on questions.
 
 6. To run test cases in the same directory as manage.py run: python manage.py test qanda
 
-Alternatively, you can also install the app using the "django-qanda-0.1.zip" package via pip:
-
-pip install --user django-qanda-0.1.zip
-
-To uninstall:
-
-pip uninstall django-qanda
+7. To uninstall the app: pip uninstall django-qanda
