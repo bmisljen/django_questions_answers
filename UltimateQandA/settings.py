@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import django_heroku, dj-database-url
+import django_heroku
+import dj_database_url
 from whitenoise.django import DjangoWhiteNoise
 
 
