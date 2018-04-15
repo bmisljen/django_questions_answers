@@ -76,8 +76,8 @@ WSGI_APPLICATION = 'UltimateQandA.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+# SECRET_KEY = config('SECRET_KEY')
+# DEBUG = config('DEBUG', default=False, cast=bool)
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 #DATABASES = {
