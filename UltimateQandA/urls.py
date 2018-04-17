@@ -21,4 +21,3 @@ urlpatterns = [
     path('qanda/', include('qanda.urls')),
     path('admin/', admin.site.urls),
 ]
-
