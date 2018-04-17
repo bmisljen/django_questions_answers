@@ -4,9 +4,21 @@ QandA
 
 QandA is a simple Django app for questions and answers. A user can add a question,
 answer the question with one or more answers, vote a question up or down and search for specific questions 
-by question name or question text. 
+by question name or question text. The questions and answers are saved in a PostgreSQL database. 
+Try it out by visiting: 
+
+https://django-qanda.herokuapp.com/qanda/
+
+And for the admin interface:
+
+https://django-qanda.herokuapp.com/admin/
+(admin username: guest, password: guestpassword) 
+
 
 Running locally:
+
+*** If cloning the project to run locally you will need to update the database settings in the settings.py file as they are currently 
+set to run on Heroku *** 
 
 The 5 most recent questions are displayed on the home page: http://127.0.0.1:8000/qanda/ along with their votes counts. You
 can click on a question to view it and add answers or click on the up/down arrows to up vote or down vote the question. Searching 
