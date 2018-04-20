@@ -61,7 +61,10 @@
             	<div class="col-xs-12 text-center">
                  	 {{ value|linebreaks }}
                 	 {{ value|linebreaks }}
-            		<h4 class="service-heading">Question Text: <input type="textarea" id="questiontext" name="questiontext" value="" required/></h4>
+                	<div class="form-group">
+						<h4 class="service-heading"><label for="questiontext">Question Text:</label></h4>
+           		 		<textarea class="form-control" id="questiontext" rows="5" name="questiontext" required></textarea>
+           		 	</div>            		
           		</div>
          	 </div>
           	<div class="row">

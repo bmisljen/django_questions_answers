@@ -83,7 +83,10 @@
 		    <div class="row">
          		<div class="col-lg-12 text-center">
 					{{ value|linebreaks }}
-           		 	<h4 class="service-heading">Your Answer: <input type="textarea" id="answertext" name="answertext" value="" required/></h4>
+					<div class="form-group">
+						<h4><label for="answertext">Your Answer:</label></h4>
+           		 		<textarea class="form-control" id="answertext" rows="5" name="answertext" required></textarea>
+           		 	</div>
 					{{ value|linebreaks }}
 					<input type="submit" class="btn btn-primary btn-xl text-uppercase" value="Submit Answer" />
 		        </div>
