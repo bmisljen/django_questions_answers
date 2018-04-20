@@ -61,6 +61,9 @@ section h3.section-subheading {
   cursor:pointer;
   overflow: hidden;
   outline:none;
+  font-weight: 700;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
 }
 
 .btn {
