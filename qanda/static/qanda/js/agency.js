@@ -31,7 +31,7 @@
             return false;
         });
         
-        $('#back-to-top').tooltip('show');
+        $('#back-to-top').tooltip('hide');
 
 
   // Closes responsive menu when a scroll trigger link is clicked
