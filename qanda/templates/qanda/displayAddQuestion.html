@@ -44,28 +44,28 @@
     <section id="addquestion">
       <div class="container">
          <div class="row">
-         	<div class="col-lg-12 text-center">
+         	<div class="col-xs-12 text-center">
             	<h2 class="section-heading">Add a new Question</h2>
           	</div>
           </div>  
           <form action="{% url 'qanda:addquestion' %}" method="post">
             {% csrf_token %}
              <div class="row">
-            	<div class="col-lg-12 text-center">
+            	<div class="col-xs-12 text-center">
                  	 {{ value|linebreaks }}
                 	 {{ value|linebreaks }}
             		<h4 class="service-heading">Question Name: <input type="text" id="questionname" name="questionname" value="" required/></h4>
           		</div>
          	 </div>
           	<div class="row">
-            	<div class="col-lg-12 text-center">
+            	<div class="col-xs-12 text-center">
                  	 {{ value|linebreaks }}
                 	 {{ value|linebreaks }}
             		<h4 class="service-heading">Question Text: <input type="text" id="questiontext" name="questiontext" value="" required/></h4>
           		</div>
          	 </div>
           	<div class="row">
-            	<div class="col-lg-12 text-center">
+            	<div class="col-xs-12 text-center">
                 	<input type="submit" class="btn btn-primary btn-xl text-uppercase" value="Save Question" />
           	    </div>
             </div>
