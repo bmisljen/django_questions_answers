@@ -51,14 +51,16 @@
           <form action="{% url 'qanda:addquestion' %}" method="post">
             {% csrf_token %}
              <div class="row">
-            	<div class="col-xs-12 text-center">
+            	<div class="col-lg-12 text-center">
                  	 {{ value|linebreaks }}
                 	 {{ value|linebreaks }}
-            		<h4 class="service-heading">Question Name: <input type="text" id="questionname" name="questionname" value="" required/></h4>
+            		<h4 class="service-heading">Question Name:</h4>
+            		 {{ value|linebreaks }}
+            		<input type="text" id="questionname" name="questionname" value="" required/>
           		</div>
          	 </div>
           	<div class="row">
-            	<div class="col-xs-12 text-center">
+            	<div class="col-lg-12 text-center">
                  	 {{ value|linebreaks }}
                 	 {{ value|linebreaks }}
                 	<div class="form-group">
