@@ -56,3 +56,5 @@ the: django-qanda-0.1.zip file (located in the git repo) by using the following 
 6. To run test cases in the same directory as manage.py run: python manage.py test qanda
 
 7. To uninstall the app: pip uninstall django-qanda
+
+If you need help with a Django project, please email me at: boris@boriswebappdevelopment.ca or visit my website and fill out the contact form at: https://www.boriswebappdevelopment.ca/
